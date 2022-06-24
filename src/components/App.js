@@ -5,8 +5,8 @@ import {getAuth} from 'firebase/auth'
 
 function App() {
   const auth = getAuth();
-  console.log(auth)
-  console.log(auth.currentUser)
+  // console.log(auth)
+  // console.log(auth.currentUser)
 
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser);
   return (
