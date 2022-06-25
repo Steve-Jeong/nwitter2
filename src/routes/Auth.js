@@ -6,7 +6,8 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 const Auth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [newAccount, setNewAccount] = useState(false)
+  const [newAccount, setNewAccount] = useState(true)
+  const [error, setError] = useState('')
 
 
   const onChange = (e) => {
@@ -35,6 +36,7 @@ const Auth = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
+          setError(error.code+' '+error.message);
         });
     } else {
       // log in
@@ -48,9 +50,12 @@ const Auth = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
+          setError(error.code+' '+error.message);
         });
     }
   }
+
+  const toggleAccount = () => setNewAccount((prev) => !prev);
 
   return (
     <div>
@@ -72,7 +77,9 @@ const Auth = () => {
           onChange={onChange}
         />
         <input type='submit' value={newAccount ? "Create Account" : "Log In"} />
+        {error}
       </form>
+      <span onClick={toggleAccount}>{newAccount? "Sign In" : "Create New Account"}</span>
       <div>
         <button>Continue with Google</button>
         <button>Continue with Github</button>
